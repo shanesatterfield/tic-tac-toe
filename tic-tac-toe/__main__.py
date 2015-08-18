@@ -9,6 +9,11 @@ def main():
         game.render()
         row, column = int(input()), int(input())
         game.make_move( row, column, first_player )
+
+        winner = game.check_win()
+        if winner != 0:
+            print('Player {} won!'.format(winner))
+
         first_player = not first_player
 
 if __name__ == '__main__':

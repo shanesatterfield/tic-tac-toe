@@ -6,7 +6,6 @@ class Game:
         self.restart()
 
     def restart( self ):
-        # self.grid = [ [ random.randint(-1, 1) for _ in range(3) ] for _ in range(3) ]
         self.grid = [ [ 0 for _ in range(3) ] for _ in range(3) ]
 
     def make_move( self, row, column, first_player ):
@@ -19,7 +18,19 @@ class Game:
         self.grid[row][column] = 1 if first_player else 2
 
     def check_win( self ):
-        return False
+        grid = list(self.grid)
+        for _ in range(2):
+            for i in range(3):
+                if grid[i][0] == grid[i][1] == grid[i][2]:
+                    return grid[i][0]
+            grid = list(zip(*grid))
+            grid = list(map(list, grid))
+
+        if grid[0][0] == grid[1][1] == grid[2][2] or \
+           grid[2][0] == grid[1][1] == grid[0][2]:
+            return grid[1][1]
+
+        return 0
 
     def render( self ):
         print(self)
