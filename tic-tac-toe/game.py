@@ -14,8 +14,9 @@ class Game( pyglet.window.Window ):
         self.tile_width, self.tile_height = 128, 128
         self.grid_width, self.grid_height = self.tile_width * 3, self.tile_height * 3
         self.grid = [ [ 0 for _ in range(3) ] for _ in range(3) ]
-        # self.ai = Minimax()
-        self.ai = RandomAI()
+
+        self.ai = Minimax()
+        # self.ai = RandomAI()
 
 
     def on_draw( self ):
@@ -28,21 +29,19 @@ class Game( pyglet.window.Window ):
 
     def on_mouse_release( self, x, y, button, modifiers ):
         if button == pyglet.window.mouse.LEFT:
-            # try:
+            try:
 
-            Grid.make_move( (self.grid_height-y) // self.tile_height, x // self.tile_width, self.grid, self.first_player )
-            winner = Grid.check_win( self.grid )
-            self.first_player = not self.first_player
-
-            if winner == 0:
-                r, c = self.ai.make_move( self.grid, self.first_player )
-                Grid.make_move(r, c, self.grid, self.first_player)
+                self.grid = Grid.make_move( (self.grid_height-y) // self.tile_height, x // self.tile_width, self.grid, self.first_player )
+                winner = Grid.check_win( self.grid )
                 self.first_player = not self.first_player
 
-            # print(Grid.open_spaces(self.grid))
+                if winner == 0:
+                    r, c = self.ai.make_move( self.grid, self.first_player )
+                    self.grid = Grid.make_move(r, c, self.grid, self.first_player)
+                    self.first_player = not self.first_player
 
-            # except Exception as e:
-            #     print(e)
+            except Exception as e:
+                print(e)
 
             winner = Grid.check_win( self.grid )
             if winner != 0:
@@ -52,9 +51,6 @@ class Game( pyglet.window.Window ):
                     print('Player {} won!'.format(winner))
                 super(Game, self).close()
 
-
-
-    
 
     def is_first_player( x ):
         return True if x == 1 else False
