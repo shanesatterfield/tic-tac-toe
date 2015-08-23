@@ -17,12 +17,8 @@ class RandomAI( AI ):
                 return (r, c)
         return 0,0
 
-# TODO Something wrong with functions. Ignore the alpha beta pruning, it's not
-# even doing the minimax right. Doesn't want to win when it can just go for it.
-# Maybe something about the sorting.
 class Minimax( AI ):
     def make_move( self, grid, this_player ):
-        # grid = grid[:]
         grid        = copy.deepcopy(grid)
         alpha, beta = float('-inf'), float('inf')
         spaces      = sorted(Grid.open_spaces( grid ), key=lambda x: abs(x[0] - x[1])%2)
@@ -31,7 +27,6 @@ class Minimax( AI ):
         return sorted(lst, key=lambda x: x[1])[-1][0]
 
 
-        # Copy the grid.
     def minimax( grid, depth, alpha, beta, this_player, curr_player ):
         # Check if the game is over and return the value.
         winner = Grid.check_win( grid )

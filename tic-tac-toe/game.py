@@ -16,10 +16,10 @@ class Game( pyglet.window.Window ):
         self.grid = [ [ 0 for _ in range(3) ] for _ in range(3) ]
 
         self.ai = Minimax()
-        # self.ai = RandomAI()
 
 
     def on_draw( self ):
+        pyglet.gl.glClearColor(255,255,255,255)
         pyglet.window.Window.flip( self )
         self.clear()
         for row in range(len(self.grid)):
@@ -50,7 +50,3 @@ class Game( pyglet.window.Window ):
                 else:
                     print('Player {} won!'.format(winner))
                 super(Game, self).close()
-
-
-    def is_first_player( x ):
-        return True if x == 1 else False
