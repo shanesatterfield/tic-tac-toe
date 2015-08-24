@@ -7,7 +7,9 @@ class AI():
         """Returns the row and column of where to place their next move."""
         return (0, 0)
 
+
 class RandomAI( AI ):
+    """Picks a random open space on the board each turn."""
     def make_move( self, grid, this_player ):
         width, height = len(grid[0])-1, len(grid)-1
 
@@ -17,7 +19,9 @@ class RandomAI( AI ):
                 return (r, c)
         return 0,0
 
+
 class Minimax( AI ):
+    """Runs the minimax algorithm with alpha beta pruning to not lose the game"""
     def make_move( self, grid, this_player ):
         grid        = copy.deepcopy(grid)
         alpha, beta = float('-inf'), float('inf')
@@ -63,13 +67,3 @@ class Minimax( AI ):
                 if beta <= alpha:
                     break
             return v
-
-
-class SolvedStrategies( AI ):
-    def make_move( self, grid, this_player ):
-        return super(Minimax, self).make_move( grid )
-
-
-class CounterPlay( AI ):
-    def make_move( self, grid, this_player ):
-        return super(Minimax, self).make_move( grid )
