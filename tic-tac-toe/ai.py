@@ -31,6 +31,7 @@ class Minimax( AI ):
         return sorted(lst, key=lambda x: x[1])[-1][0]
 
 
+    @staticmethod
     def minimax( grid, depth, alpha, beta, this_player, curr_player ):
         # Check if the game is over and return the value.
         winner = Grid.check_win( grid )

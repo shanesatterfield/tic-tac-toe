@@ -6,6 +6,7 @@ class Grid:
     def __init__( self, width=3, height=3 ):
         self.grid = [[0 for _ in range(width)] for _ in range(height)]
 
+    @staticmethod
     def make_move( row, column, grid, first_player ):
         grid = copy.deepcopy(grid)
         if row < 0 or row >= len(grid) or column < 0 or column >= len(grid[0]):
@@ -18,6 +19,7 @@ class Grid:
 
         return grid
 
+    @staticmethod
     def open_spaces( grid ):
         lst = []
         for row in range(len(grid)):
@@ -43,6 +45,7 @@ class Grid:
         else:
             return ' '
 
+    @staticmethod
     def check_win( grid ):
         grid = copy.deepcopy(grid)
         # Check for win conditions.
