@@ -32,9 +32,7 @@ class Game( pyglet.window.Window ):
     def on_draw( self ):
         pyglet.window.Window.flip( self )
         self.clear()
-        # pyglet.graphics.draw(2, pyglet.gl.GL_LINES, ('v2i', (
-        #     0, 128, 384, 128
-        # )))
+
         for row in range(len(self.grid)):
             for column in range(len(self.grid[row])):
                 if self.grid[row][column] != 0:
@@ -74,14 +72,11 @@ class Game( pyglet.window.Window ):
             if winner != 0:
                 label_text = None
                 if winner == -1:
-                    # print("Tie! It's a cat's eye.")
-                    label_text = "Cat's eye!"
+                    label_text = "Tie!"
                 else:
-                    # print('Player {} won!'.format(winner))
                     label_text = 'Player {} won!'.format(winner)
 
                 self.game_over = True
-                # sans_serif = pyglet.font.load(('Verdana', 'Helvetica', 'Arial'), 16)
                 self.label = pyglet.text.Label(
                     label_text,
                     font_name='Arial',
